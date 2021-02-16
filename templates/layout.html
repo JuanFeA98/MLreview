@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Science</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/index.css') }}">
+    <link rel="shortcut icon" href="../static/images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <a href="/">
+            <img src="../static/images/logo.png" alt="">
+            <p>Data Science</p>
+        </a>
+    </header>
+
+    <aside>
+        <a href="/">Machine Learning</a><br>
+        <a href="/LinealRegression">Regresión Lineal</a><br>
+        <a href="/LogisticRegression">Regresión Logistica</a><br>
+        <a href="/TreeDecision">Árbol de decisión</a><br>
+        <a href="/Kmeans">K-Means</a><br>
+    </aside>
+    {% block body %}
+    {% endblock %}
+
+</body>
+</html>

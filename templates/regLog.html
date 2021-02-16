@@ -1,0 +1,60 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<section class="RegLin">
+    <h1>Regresión Logística</h1>
+    <p>
+        La regresión logística es un mecanismo eficiente para calcular probabilidades. El resultado puede utilizarse tal cual o convertirlo a una categoría binaria, para lograr esto nos apoyamos en una función matemática llamada Sigmoide. Si en caso la clasificación tuviera más parámetros, haríamos uso de la función Softmax.
+    </p>
+    <h2>Regresión Logística con Python</h2>
+    <p>Cargamos nuestras librerias</p>
+    <div class="code">
+        <code>
+            import pandas as pd<br>
+            import numpy as np<br>
+            from sklearn import metrics<br>
+            from sklearn.linear_model import LogisticRegression<br>
+        </code>
+    </div>
+    <p>Cargamos y configuramos nuestro dataset</p>
+    <div class="code">
+        <code>
+            df = pd.read_csv('diabetes.csv')<br>
+            <br>
+            X = df.iloc[:,[0,1,2,4,5,6,7]].values<br>
+            y = df.iloc[:, 8].values
+        </code>
+    </div>
+    <p>Construimos y entrenamos nuestro modelo</p>
+    <div class="code">
+        <code>
+            model = LogisticRegression(max_iter=len(X))
+            model.fit(X, y)
+        </code>
+    </div>
+    <h2 style="text-align: center;">EL MODELO</h2>
+    <div style="margin-bottom: 50px;">
+        <form action="/calcRegLog" method="POST">
+            <label style="color: white;">Ingresa los valores</label>
+            <input type="number" name="pregnancies" placeholder="Número de embarazos">
+            <input type="number" name="glucose" placeholder="Glucosa">
+            <input type="number" name="bloodPressure" placeholder="Presión de la sangre">
+            <input type="number" name="insulin" placeholder="Insulina">
+            <input type="number" name="BMI" placeholder="BMI">
+            <input type="number" name="DiabetesPedigreeFunction" placeholder="Función del pedigrí de la diabetes (0-1)">
+            <input type="number" name="age" placeholder="Edad">
+            <button type="submit">Go</button>
+        </form>
+    
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+            <p class="p_result">{{message}}</p>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
+</section>
+
+{% endblock %}

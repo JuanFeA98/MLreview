@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<section class="RegLin">
+    <h1>K-Means</h1>
+    <p>
+        Es un método de agrupamiento, que tiene como objetivo la partición de un conjunto de n observaciones en k grupos en el que cada observación pertenece al grupo cuyo valor medio es más cercano. 
+    </p>
+    <h2 style="text-align: center;">EL MODELO</h2>
+    <div style="margin-bottom: 50px;">
+        <form action="/calcKmeans" method="POST">
+            <label style="color: white;">Ingresa los valores</label>
+            <input type="number" name="sepalL" placeholder="Longitud del sépalo">
+            <input type="number" name="sepalW" placeholder="Ancho del sépalo">
+            <input type="number" name="petalL" placeholder="Longitud del petalo">
+            <input type="number" name="petalW" placeholder="Ancho del petalo">
+            <button type="submit">Go</button>
+        </form>
+    
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+            <p class="p_result">{{message}}</p>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
+</section>
+
+{% endblock %}

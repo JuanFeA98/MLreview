@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<section class="RegLin">
+    <h1>Árbol de decisión</h1>
+    <p>
+        Es un modelo de predicción utilizado en diversos ámbitos que van desde la inteligencia artificial hasta la Economía. Dado un conjunto de datos se fabrican diagramas de construcciones lógicas, muy similares a los sistemas de predicción basados en reglas, que sirven para representar y categorizar una serie de condiciones que ocurren de forma sucesiva, para la resolución de un problema.
+    </p>
+    <h2 style="text-align: center;">EL MODELO</h2>
+    <div style="margin-bottom: 50px;">
+        <form action="/calcTree" method="POST">
+            <label style="color: white;">Ingresa los valores</label>
+            <input type="number" name="sex" placeholder="Sexo (1 = Mujer, 0 = Hombre)">
+            <input type="number" name="pclass" placeholder="Clase">
+            <input type="number" name="age" placeholder="Edad">
+            <input type="number" name="sibsp" placeholder="# de hermanos o conyuges a bordo">
+            <input type="number" name="parch" placeholder="# de padres o hijos a bordo">
+            <input type="number" name="fare" placeholder="Tarifa">
+            <button type="submit">Go</button>
+        </form>
+    
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+            <p class="p_result">{{message}}</p>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
+</section>
+
+{% endblock %}

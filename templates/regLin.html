@@ -1,0 +1,73 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<section class="RegLin">
+    <h1>Regresión Lineal</h1>
+    <p>
+        Es un modelo matemático usado para aproximar la relación de dependencia entre una variable Y (label) y una variable X (feature). 
+    </p>
+    <ul>
+        <li>
+            <strong>Modelo.</strong> Define la relación entre features y label. Una vez que lo construyamos con datos historicos vamos a predecir el futuro y permitir que la maquina pueda tomar esas decisiones con lo ya aprendido.
+        </li>
+        <li>
+            <strong>Training.</strong> En este proceso le daremos un dataset al modelo para que aprenda con datos que tienen un label. En esta etapa, la maquina aprendera como se relacionan las variables.
+        </li>
+        <li>
+            <strong>Inferencia.</strong> En esta etapa nuestro modelo ya puede realizar predicciones.
+        </li>
+    </ul>
+    <h2>Regresión Lineal con Python</h2>
+    <p>Cargamos nuestras librerias</p>
+    <div class="code">
+        <code>
+            import pandas as pd <br>
+            import numpy as np <br>
+            import matplotlib.pyplot as plt <br>
+            <br>
+            from sklearn import linear_model <br>
+            from sklearn.model_selection import train_test_split<br>
+        </code>
+    </div>
+    <p>Cargamos y configuramos nuestros datasets</p>
+    <div class="code">
+        <code>
+            df = pd.read_csv('./salarios.csv')<br>
+            df['ones']  = 1<br>
+            <br>
+            X = df.iloc[:,[2, 0]].values<br>
+            y = df.iloc[:,[1]].values<br>
+        </code>
+    </div>
+    <p>Construimos y entrenamos nuestro modelo</p>
+    <div class="code">
+        <code>
+            model = LinearRegression() <br>
+            model.fit(x, y)
+        </code>
+    </div>
+    <h2 style="text-align: center;">EL MODELO</h2>
+    <div style="margin-bottom: 50px;">
+        <form action="/calcRegLin" method="POST">
+            <label style="color: white;">Ingresa los valores</label>
+            <input type="number" name="firstFloor" placeholder="Área del primer piso">
+            <input type="number" name="secondFloor" placeholder="Área del segundo piso">
+            <input type="number" name="overQuall" placeholder="Calidad del material (1-10)">
+            <input type="number" name="garage" placeholder="Área del garaje">
+            <button type="submit">Go</button>
+        </form>
+    
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+            <p class="p_result">{{message}}</p>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
+
+
+</section>
+
+{% endblock %}
